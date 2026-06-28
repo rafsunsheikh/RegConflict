@@ -1,5 +1,7 @@
 # RegConflict
 
+[![DOI](https://zenodo.org/badge/1283199318.svg)](https://doi.org/10.5281/zenodo.21007776)
+
 **A cross-jurisdictional benchmark for regulatory conflict detection.**
 
 RegConflict is an expert-annotated benchmark for the task of detecting conflicts between regulatory regimes from different jurisdictions in financial regulation. It pairs a four-class typology of conflict kinds with ≈250 labelled regime pairs, a curated 247-document multi-jurisdictional regulatory corpus, and reproducible baselines spanning random predictors, zero-shot prompted LLMs, and a supervised fine-tuned cross-encoder.
