@@ -1,6 +1,7 @@
 # RegConflict
 
 [![DOI](https://zenodo.org/badge/1283199318.svg)](https://doi.org/10.5281/zenodo.21007776)
+[![HuggingFace Dataset](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-sm.svg)](https://huggingface.co/datasets/rafsunsheikh/RegConflict)
 
 **A cross-jurisdictional benchmark for regulatory conflict detection.**
 
