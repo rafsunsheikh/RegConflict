@@ -122,25 +122,6 @@ The audit's verbatim per-source license-clause quotations are preserved in [`LIC
 
 ---
 
-## Citing
-
-If you use RegConflict, please cite both the paper (forthcoming) and this dataset release. The citation entry in [`CITATION.cff`](CITATION.cff) follows the [Citation File Format](https://citation-file-format.github.io/) standard and is auto-rendered by GitHub.
-
-```bibtex
-@inproceedings{regconflict2027,
-  title     = {RegConflict: A Cross-Jurisdictional Benchmark for Regulatory Conflict Detection},
-  author    = {[author list — anonymised for double-blind review]},
-  booktitle = {Proceedings of the 2027 Conference on Empirical Methods in Natural Language Processing},
-  year      = {2027},
-  publisher = {Association for Computational Linguistics},
-  doi       = {10.5281/zenodo.XXXXXXX}
-}
-```
-
-The Zenodo DOI above is a placeholder; the actual versioned DOI lands at v1.0 release.
-
----
-
 ## Contributing
 
 We welcome contributions that expand the dataset's coverage or improve methodology. The most useful directions:
