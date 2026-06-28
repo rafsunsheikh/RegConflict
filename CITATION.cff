@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "If you use this dataset, code, or benchmark, please cite the accompanying paper as well as the dataset deposit."
+title: "RegConflict: A Cross-Jurisdictional Benchmark for Regulatory Conflict Detection"
+type: dataset
+abstract: >-
+  RegConflict is a benchmark for detecting conflicts between regulatory regimes
+  across jurisdictions in financial regulation. It comprises a four-class
+  typology of regulatory conflicts (structural, operationally resolvable,
+  interpretive, recurring friction), approximately 250 expert-labelled conflict
+  pairs across six jurisdictional sources (Australia, the European Union,
+  Singapore, FATF, BIS, IOSCO), a curated multi-jurisdictional regulatory
+  corpus of 247 source documents released under a documented per-source
+  licensing framework, and baseline results spanning random predictors,
+  zero-shot prompted LLMs at two parameter scales, and a supervised fine-tuned
+  encoder.
+version: "0.1.0-draft"
+date-released: "2027-XX-XX"  # [VERIFY: actual release date]
+license: MIT  # repository's primary license; layered scheme — see LICENSES/
+url: "https://github.com/OWNER/RegConflict"  # [VERIFY: replace OWNER once repo is created]
+repository-code: "https://github.com/OWNER/RegConflict"  # [VERIFY]
+keywords:
+  - regulatory NLP
+  - legal NLP
+  - cross-jurisdictional
+  - conflict detection
+  - natural language inference
+  - financial regulation
+  - benchmark
+  - typology
+  - LLM evaluation
+  - DeBERTa
+  - zero-shot
+authors:
+  # Author identities are intentionally omitted for double-blind review.
+  # Update with full author list at camera-ready / non-anonymous release.
+  - given-names: "Anonymous"
+    family-names: "Author"
+preferred-citation:
+  type: conference-paper
+  title: "RegConflict: A Cross-Jurisdictional Benchmark for Regulatory Conflict Detection"
+  conference:
+    name: "Proceedings of the 2027 Conference on Empirical Methods in Natural Language Processing"
+    location: "[VERIFY: venue]"
+  year: 2027
+  month: 11  # [VERIFY: actual EMNLP 2027 dates]
+  publisher:
+    name: "Association for Computational Linguistics"
+  authors:
+    - given-names: "Anonymous"
+      family-names: "Author"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.XXXXXXX"  # [VERIFY: Zenodo DOI once deposit is published]
+    description: "Zenodo deposit (versioned)"
+  - type: url
+    value: "https://huggingface.co/datasets/OWNER/RegConflict"  # [VERIFY: HF dataset]
+    description: "HuggingFace Datasets mirror"

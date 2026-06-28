@@ -1,0 +1,67 @@
+# Evaluation harness configuration.
+#
+# Controls the evaluation harness in src/eval/benchmark/, used by all baselines
+# via scripts/run_eval.py and by individual baseline scripts internally.
+
+metrics:
+  primary: binary_f1                 # positive class = "conflict"
+  reported:
+    - binary_f1
+    - macro_f1                       # over {conflict, non_conflict}
+    - typology_macro_f1              # over {structural_unresolved,
+                                     #       operationally_resolvable,
+                                     #       interpretive_fact_sensitive,
+                                     #       recurring_friction}
+    - joint_em                       # exact-match: both binary and typology correct
+    - accuracy
+    - binary_precision
+    - binary_recall
+
+bootstrap:
+  n_resamples: 1000
+  seed: 42
+  ci_quantiles: [0.025, 0.975]       # 95% CI
+
+paired_bootstrap:
+  # Used by scripts/paired_bootstrap_baselines.py for between-baseline
+  # significance testing on test binary F1.
+  n_resamples: 1000
+  seed: 42
+  null_hypothesis: equal_mean_f1
+  alternative: two_sided
+
+breakdowns:
+  # Diagnostic splits computed alongside the primary metrics.
+  per_conflict_type:
+    enabled: true
+    method: one_vs_rest_f1
+  per_jurisdiction_pair:
+    enabled: true
+    granularity: jurisdiction          # vs jurisdiction-pair-string
+    same_vs_cross:
+      enabled: true                    # binary: same vs cross jurisdiction
+  per_severity:
+    enabled: true
+    metric: recall                     # severity is only defined on positives
+
+splits:
+  default_evaluated:
+    - test
+    - gold_iaa
+  validation_used_for:
+    - hyperparameter_selection
+    - early_stopping_decisions
+  test_used_for:
+    - final_reporting
+    - paired_bootstrap_significance
+    # Never use test for selection of any kind.
+
+output:
+  results_dir: results            # relative to repo root
+  per_run_dir_format: "{baseline}/{cell_or_seed}/{split}_{timestamp_utc}"
+  predictions_filename: predictions.jsonl
+  metrics_filename: metrics.json
+  config_filename: config.json
+  confusion_matrix_filename: confusion_matrix.json
+  errors_filename: errors.jsonl
+  eval_log_filename: eval_log.txt

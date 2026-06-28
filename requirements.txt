@@ -1,0 +1,30 @@
+# RegConflict — release runtime dependencies.
+#
+# Minimal set required to load the benchmark, run the baselines, and reproduce
+# the paper's reported numbers. Development extras (linting, type-checking,
+# notebook tooling) live in requirements-dev.txt (Phase 4).
+
+# Core
+numpy>=1.26,<2.3
+pydantic>=2.7
+
+# Evaluation harness
+scikit-learn>=1.3
+tqdm>=4.66
+
+# Configuration loading
+pyyaml>=6.0
+
+# Fine-tuned baseline (DeBERTa-v3-base cross-encoder)
+torch>=2.3
+transformers>=4.40
+sentencepiece>=0.2
+
+# Zero-shot LLM baseline (HTTP client for llama.cpp / OpenAI-compatible API)
+httpx>=0.27
+
+# Tier 3 fetch tool
+# (httpx already pinned above)
+
+# Testing
+pytest>=8.0

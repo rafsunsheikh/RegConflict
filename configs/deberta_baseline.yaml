@@ -1,0 +1,71 @@
+# DeBERTa-v3-base fine-tuned cross-encoder baseline configuration.
+#
+# Mirrors the TrainConfig defaults in src/baselines/fine_tuned/train.py for
+# the v1.0 release results. Override fields via scripts/train_deberta_baseline.py
+# command-line flags if you want to deviate.
+#
+# Reproducing the paper:
+#   python scripts/train_deberta_baseline.py --mode multi_seed
+#
+# Headline result with this config (5 seeds: 42-46):
+#   test binary F1 = 0.517 ± 0.022
+#   gold_iaa binary F1 = 0.337 ± 0.047
+#
+# See Appendix F of the paper for full hyperparameter justification and
+# sweep results.
+
+model:
+  base_model: microsoft/deberta-v3-base
+  hidden_size: 768           # informational; comes from the base model
+  n_params: 184_000_000      # informational
+  num_binary_classes: 2
+  num_typology_classes: 4
+  gradient_checkpointing: true    # required for MPS memory (Apple Silicon)
+
+tokenizer:
+  name: deberta-v3            # SentencePiece, 128K vocab
+  max_seq_length: 512         # DeBERTa positional limit
+  joint_passage_budget: 509   # max_seq_length - [CLS] - 2 × [SEP]
+  truncation: joint_tail      # drop lowest-ranked chunks first; mid-truncate
+                              # the last included chunk on overflow
+
+training:
+  optimizer: adamw
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1.0e-8
+
+  lr_schedule: linear_warmup_then_decay
+  warmup_ratio: 0.10
+
+  batch_size: 8
+  eval_batch_size: 32
+  max_epochs: 10
+  early_stopping_patience: 3        # epochs of val binary F1 plateau
+  grad_clip_norm: 1.0
+
+  binary_loss: cross_entropy_with_class_weights
+  binary_class_weights: [1.0, 6.6]  # ≈ inverse train conflict frequency
+  typology_loss: masked_cross_entropy   # ignore_index=-100 on non-conflict
+  typology_weight: 1.0                  # weight in total loss
+
+  dropout: 0.1
+  log_every_n_batches: 20
+
+multi_seed:
+  seeds: [42, 43, 44, 45, 46]
+
+# Hyperparameter sweep (selection log; see Appendix F.2)
+sweep:
+  search_space:
+    learning_rate: [2.0e-5, 3.0e-5, 5.0e-5]
+    batch_size: [4, 8]
+  selected:
+    learning_rate: 2.0e-5
+    batch_size: 8
+  excluded:
+    # lr=3e-5, batch=8 converged to a degenerate all-negative classifier
+    # (val binary F1 = 0.000) and was excluded from selection.
+    - {learning_rate: 3.0e-5, batch_size: 8, reason: degenerate_collapse}
