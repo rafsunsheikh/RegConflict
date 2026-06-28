@@ -50,8 +50,8 @@ preferred-citation:
       family-names: "Author"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.XXXXXXX"  # [VERIFY: Zenodo DOI once deposit is published]
-    description: "Zenodo deposit (versioned)"
+    value: "10.5281/zenodo.21007776"
+    description: "Zenodo deposit (concept DOI — resolves to latest version)"
   - type: url
     value: "https://huggingface.co/datasets/OWNER/RegConflict"  # [VERIFY: HF dataset]
     description: "HuggingFace Datasets mirror"
